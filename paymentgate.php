@@ -1,11 +1,12 @@
 <?php
 //VNPAY
+
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 $vnp_TmnCode = "ICYGT6RB"; //Mã định danh merchant kết nối (Terminal Id)
 $vnp_HashSecret = "WQYVIZYFBSKXLKEHHQAVWWIYAMUIUCWN"; //Secret key
 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_Returnurl = "http://localhost/pay.php";
+$vnp_Returnurl = "http://localhost/vnpay_return.php";
 $vnp_apiUrl = "http://sandbox.vnpayment.vn/merchant_webapi/merchant.html";
 $apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 //Config input format
@@ -19,7 +20,6 @@ $vnp_Amount = $_POST['totalamount']; // Số tiền thanh toán
 $vnp_Locale = 'vn'; //Ngôn ngữ chuyển hướng thanh toán
 $vnp_BankCode = 'NCB'; //Mã phương thức thanh toán
 $vnp_IpAddr = $_SERVER['REMOTE_ADDR']; //IP Khách hàng thanh toán
-
 $inputData = array(
     "vnp_Version" => "2.1.0",
     "vnp_TmnCode" => $vnp_TmnCode,
@@ -56,9 +56,11 @@ foreach ($inputData as $key => $value) {
 
 $vnp_Url = $vnp_Url . "?" . $query;
 if (isset($vnp_HashSecret)) {
-    $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+    $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
     $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
 }
-
 header('Location: ' . $vnp_Url);
 die();
+
+
+//MOMO

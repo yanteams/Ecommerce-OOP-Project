@@ -1,6 +1,7 @@
 <?php
 include 'inc/header.php';
-
+sleep(5);
+header('location: history_order.php');
 ?>
 
 <!-- main wrapper start -->

@@ -116,6 +116,9 @@ class cart
         $sId = session_id();
         $query = "DELETE FROM tbl_cart WHERE `sId`='$sId'";
         $result = $this->db->delete($query);
+        if ($result) {
+            header('location: success.php');
+        }
         return $result;
     }
     public function del_compare($customer_id)
@@ -124,8 +127,35 @@ class cart
         $result = $this->db->delete($query);
         return $result;
     }
-    public function insertOrders($customer_id)
+    public function insertOrders($customer_id, $method)
     {
+        $sId = session_id();
+        $query = "SELECT * FROM tbl_cart WHERE `sId`='$sId'";
+        $get_pd = $this->db->select($query);
+        $order_code = rand(0000, 9999);
+        $query_placed = "INSERT INTO `tbl_placed`(`order_code`, `status`, `customer_id`) 
+        VALUES ('$order_code','0','$customer_id')";
+        $insert_placed = $this->db->insert($query_placed);
+
+        if ($get_pd) {
+            while ($result = $get_pd->fetch_assoc()) {
+                $productId = $result['productId'];
+                $productName = $result['productName'];
+                $quantity = $result['quantity'];
+                $price = $result['price'] * $quantity;
+                $image = $result['image'];
+                $query_order = "INSERT INTO `tbl_order`(`order_code`,`productId`, `productName`, `customer_id`, `quantity`, `price`, `method`,`image`) 
+            VALUES  ('$order_code','$productId','$productName','$customer_id','$quantity','$price','$method','$image')";
+                $insert_order = $this->db->insert($query_order);
+            }
+            return true;
+        }
+
+        return false;
+    }
+    public function insertPaid($amount, $trans_code, $customer_id, $method, $status)
+    {
+
         $sId = session_id();
         $query = "SELECT * FROM tbl_cart WHERE `sId`='$sId'";
         $get_pd = $this->db->select($query);
@@ -140,15 +170,26 @@ class cart
                 $quantity = $result['quantity'];
                 $price = $result['price'] * $quantity;
                 $image = $result['image'];
-                $query_order = "INSERT INTO `tbl_order`(`order_code`,`productId`, `productName`, `customer_id`, `quantity`, `price`, `image`) 
-            VALUES  ('$order_code','$productId','$productName','$customer_id','$quantity','$price','$image')";
-                $insert_order = $this->db->insert($query_order);
-            }
-            return true;
-        }
+                $query_paid = "INSERT INTO `tbl_history_paid`(`trans_code`, `amount`, `customer_id`, `productId`, `productName`, `quantity`, `type`,`status`)
+            VALUES  ('$trans_code','$amount','$customer_id','$productId','$productName','$quantity','$method','$status')";
+                $check_code = "SELECT * FROM `tbl_history_paid` WHERE trans_code = '$trans_code' LIMIT 1";
+                $result_check = $this->db->select($check_code);
+                if ($result_check) {
+                    echo '';
 
-        return false;
+
+                } else {
+                    $insert_paid = $this->db->insert($query_paid);
+                }
+                return true;
+            }
+
+            return false;
+        }
     }
+
+
+
     public function getAmountprice($customer_id)
     {
         $query = "SELECT price FROM tbl_order WHERE `customer_id`='$customer_id'";
@@ -170,7 +211,7 @@ class cart
         $get_cart_history = $this->db->select($query);
         return $get_cart_history;
     }
-    
+
     public function get_inbox_cart()
     {
         $query = "SELECT * FROM tbl_placed,tbl_customer
@@ -182,7 +223,7 @@ class cart
     public function shifted($id)
     {
         $id = mysqli_real_escape_string($this->db->link, $id);
-       
+
         $query = "UPDATE `tbl_placed` SET
         `status`='1'
         WHERE `order_code`='$id'";
@@ -198,7 +239,7 @@ class cart
     public function confirm_received($id)
     {
         $id = mysqli_real_escape_string($this->db->link, $id);
-       
+
         $query = "UPDATE `tbl_placed` SET
         `status`='2'
         WHERE `order_code`='$id'";

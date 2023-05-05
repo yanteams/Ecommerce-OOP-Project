@@ -27,6 +27,7 @@ With the increasing growth of the fashion industry and the growing competition, 
 </li>
 <li>Site options management, providing users with the ability to manage various options and settings for the website.</li>
 </ul>
+The integrated online payment system includes: MOMO ATM, MOMO QR Code, and VNPAY.
 
 <p align="middle">
 
