@@ -11,6 +11,18 @@ $id = $_GET['catId'];
 
 
 ?>
+    <?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        $id = $_POST['productId'];
+        $quantity = $_POST['quantity'];
+        $product_stock = $_POST['stock'];
+        $add_to_cart = $ct->addtocart($product_stock,$quantity, $id);
+        if($add_to_cart){
+            header('location: cart.php');
+        }
+    }
+    
+    ?>
     <!-- main wrapper start -->
     <main class="body-bg">
 
@@ -295,8 +307,13 @@ if($get_product_by_cat){
                                                 <span class="price-old"><del>$29.99</del></span>
                                             </div>
                                             <div class="product-item-action">
-                                                <a class="btn btn-cart" href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>"><i class="ion-bag"></i>Details</a>
-                                            </div>
+                                            <form action="" method="POST">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="productId" value="<?php echo $result_by_cat['productId'];?>">
+<input type="hidden" name="stock" value="<?php echo $result_by_cat['product_stock'];?>">
+                                                    <button class="btn btn-cart" type="submit" name="add_to_cart"><i class="ion-bag"></i> Add
+                                                        To Cart</button>
+                                                        </form>                                            </div>
                                         </div>
                                     </div>
                                     <!-- product grid end -->

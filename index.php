@@ -3,6 +3,19 @@ include 'inc/header.php';
 include 'inc/slider.php'
     ?>
 
+    <?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        $id = $_POST['productId'];
+        $quantity = $_POST['quantity'];
+        $product_stock = $_POST['stock'];
+        $add_to_cart = $ct->addtocart($product_stock,$quantity, $id);
+        if($add_to_cart){
+            header('location: cart.php');
+        }
+    }
+    
+    ?>
+
 
   
         <!-- service features start -->
@@ -104,8 +117,13 @@ include 'inc/slider.php'
                                                                 <span class="price-regular">$<?php echo $fm->format_currency( $result['price']); ?></span>
                                                                 <span class="price-old"><del>$29.99</del></span>
                                                             </div>
-                                                            <a class="btn btn-cart" href="cart.php"><i class="ion-bag"></i> Add To
-                                                                Cart</a>
+                                                            <form action="" method="POST">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="productId" value="<?php echo $result['productId'];?>">
+<input type="hidden" name="stock" value="<?php echo $result['productQuantity'];?>">
+                                                    <button class="btn btn-cart" type="submit" name="add_to_cart"><i class="ion-bag"></i> Add
+                                                        To Cart</button>
+                                                        </form>
                                                             <div class="product-countdown" data-countdown="2024/12/16"></div>
                                                         </div>
                                                     </div>
@@ -365,15 +383,7 @@ include 'inc/slider.php'
                                                             <span class="price-regular">$<?php echo $fm->format_currency($result_new['price']);?></span>
                                                             <span class="price-old"><del>$29.99</del></span>
                                                         </div>
-                                                        <div class="add-to-links group-action-link">
-                                                            <a href="wishlist.php" data-bs-toggle="tooltip"
-                                                                title="Add to Wishlist"><i
-                                                                    class="ion-android-favorite-outline"></i></a>
-                                                            <a href="compare.php" data-bs-toggle="tooltip"
-                                                                title="Add to Compare"><i class="ion-stats-bars"></i></a>
-                                                            <a href="cart.php" data-bs-toggle="tooltip" title="Add to Cart"><i
-                                                                    class="ion-bag"></i></a>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -626,8 +636,13 @@ include 'inc/slider.php'
                                                     <span class="price-old"><del>$29.99</del></span>
                                                 </div>
                                                 <div class="product-item-action">
-                                                    <a class="btn btn-cart" href="cart.php"><i class="ion-bag"></i> Add
-                                                        To Cart</a>
+                                                    <form action="" method="POST">
+<input type="hidden" name="quantity" value="1">
+<input type="hidden" name="productId" value="<?php echo $result['productId'];?>">
+<input type="hidden" name="stock" value="<?php echo $result['product_stock'];?>">
+                                                    <button class="btn btn-cart" type="submit" name="add_to_cart"><i class="ion-bag"></i> Add
+                                                        To Cart</button>
+                                                        </form>
                                                 </div>
                                             </div>
                                         </div>
