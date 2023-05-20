@@ -47,7 +47,7 @@ $id = $_GET['catId'];
                                 }
                                 ?>
                                 <ul class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">shop</li>
                                 </ul>
                             </nav>
@@ -77,34 +77,34 @@ $id = $_GET['catId'];
                                             <ul class="mobile-menu">
                                                 <li class="menu-item-has-children"><a href="#">hand tools</a>
                                                     <ul class="dropdown">
-                                                        <li><a href="product-details.html">fresh food</a></li>
-                                                        <li><a href="product-details.html">junk food</a></li>
-                                                        <li><a href="product-details.html">wet food</a></li>
-                                                        <li><a href="product-details.html">dry food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">fresh food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">junk food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">wet food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">dry food</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="menu-item-has-children"><a href="#">digital tools</a>
                                                     <ul class="dropdown">
-                                                        <li><a href="product-details.html">fresh food</a></li>
-                                                        <li><a href="product-details.html">junk food</a></li>
-                                                        <li><a href="product-details.html">wet food</a></li>
-                                                        <li><a href="product-details.html">dry food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">fresh food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">junk food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">wet food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">dry food</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="menu-item-has-children"><a href="#">kids shoppers</a>
                                                     <ul class="dropdown">
-                                                        <li><a href="product-details.html">fresh food</a></li>
-                                                        <li><a href="product-details.html">junk food</a></li>
-                                                        <li><a href="product-details.html">wet food</a></li>
-                                                        <li><a href="product-details.html">dry food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">fresh food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">junk food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">wet food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">dry food</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="menu-item-has-children"><a href="#">electronics</a>
                                                     <ul class="dropdown">
-                                                        <li><a href="product-details.html">fresh food</a></li>
-                                                        <li><a href="product-details.html">junk food</a></li>
-                                                        <li><a href="product-details.html">wet food</a></li>
-                                                        <li><a href="product-details.html">dry food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">fresh food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">junk food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">wet food</a></li>
+                                                        <li><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">dry food</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -291,17 +291,17 @@ if($get_product_by_cat){
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <div class="product-thumb">
-                                            <a href="product-details.html">
+                                            <a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">
                                                 <img src="admin/uploads/<?php echo $result_by_cat['image'];?>" alt="">
                                             </a>
                                             <div class="add-to-links">
-                                                <a href="wishlist.html" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                <a href="compare.html" data-bs-toggle="tooltip" title="Add to Compare"><i class="ion-stats-bars"></i></a>
+                                                <a href="wishlist.php" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a>
+                                                <a href="compare.php" data-bs-toggle="tooltip" title="Add to Compare"><i class="ion-stats-bars"></i></a>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" title="Quick View"><i class="ion-eye"></i></span></a>
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h5 class="product-name"><a href="product-details.html"><?php echo $result_by_cat['productName'];?></a></h5>
+                                            <h5 class="product-name"><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>"><?php echo $result_by_cat['productName'];?></a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular"><?php echo $fm->format_currency($result_by_cat['price']);?></span>
                                                 <span class="price-old"><del>$29.99</del></span>
@@ -321,12 +321,12 @@ if($get_product_by_cat){
                                     <!-- product list item end -->
                                     <div class="product-list-item">
                                         <div class="product-thumb">
-                                            <a href="product-details.html">
+                                            <a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">
                                                 <img src="assets/img/product/product-1.jpg" alt="">
                                             </a>
                                             <div class="add-to-links">
-                                                <a href="wishlist.html" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a>
-                                                <a href="compare.html" data-bs-toggle="tooltip" title="Add to Compare"><i class="ion-stats-bars"></i></a>
+                                                <a href="wishlist.php" data-bs-toggle="tooltip" title="Add to Wishlist"><i class="ion-android-favorite-outline"></i></a>
+                                                <a href="compare.php" data-bs-toggle="tooltip" title="Add to Compare"><i class="ion-stats-bars"></i></a>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#quick_view"><span data-bs-toggle="tooltip" title="Quick View"><i class="ion-eye"></i></span></a>
                                             </div>
                                         </div>
@@ -338,7 +338,7 @@ if($get_product_by_cat){
                                                 <span><i class="ion-android-star"></i></span>
                                                 <span><i class="ion-android-star"></i></span>
                                             </div>
-                                            <h5 class="product-name"><a href="product-details.html">Private Selection Wild Caught</a></h5>
+                                            <h5 class="product-name"><a href="product-details.php?proid=<?php echo $result_by_cat['productId'];?>">Private Selection Wild Caught</a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">$50.00</span>
                                                 <span class="price-old"><del>$29.99</del></span>
@@ -347,7 +347,7 @@ if($get_product_by_cat){
                                                 quod numquam, sit fugiat, deserunt ipsa mollitia sunt quam corporis ullam
                                                 rem, accusantium adipisci officia eaque.</p>
                                             <div class="product-item-action">
-                                                <a class="btn btn-cart" href="cart.html"><i class="ion-bag"></i> Add To Cart</a>
+                                                <a class="btn btn-cart" href="cart.php"><i class="ion-bag"></i> Add To Cart</a>
                                             </div>
                                         </div>
                                     </div>
